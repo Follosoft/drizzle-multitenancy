@@ -1,5 +1,4 @@
-import type { NeonHttpDatabase } from 'drizzle-orm/neon-http'
-import type { Tenant, TenantContext, SwitchTenantTask } from '../types.js'
+import type { Tenant, TenantContext, SwitchTenantTask, DrizzleDatabase } from '../types.js'
 import { createContext, makeCurrent, forgetCurrent } from '../context/tenant-context.js'
 import { tenants } from '../schema/tenants.js'
 
@@ -7,7 +6,7 @@ import { tenants } from '../schema/tenants.js'
  * Iterate over all (or a subset of) tenants, running a callback with each as current.
  */
 export async function eachCurrent(
-  landlordDb: NeonHttpDatabase,
+  landlordDb: DrizzleDatabase,
   tasks: SwitchTenantTask[],
   callback: (ctx: TenantContext) => void | Promise<void>,
   tenantList?: Tenant[],
@@ -29,7 +28,7 @@ export async function eachCurrent(
  * Map over all (or a subset of) tenants, collecting results.
  */
 export async function mapCurrent<T>(
-  landlordDb: NeonHttpDatabase,
+  landlordDb: DrizzleDatabase,
   tasks: SwitchTenantTask[],
   callback: (ctx: TenantContext) => T | Promise<T>,
   tenantList?: Tenant[],
@@ -54,7 +53,7 @@ export async function mapCurrent<T>(
  * Filter tenants based on a predicate run with each tenant as current.
  */
 export async function filterCurrent(
-  landlordDb: NeonHttpDatabase,
+  landlordDb: DrizzleDatabase,
   tasks: SwitchTenantTask[],
   predicate: (ctx: TenantContext) => boolean | Promise<boolean>,
   tenantList?: Tenant[],
@@ -77,7 +76,7 @@ export async function filterCurrent(
   return matching
 }
 
-async function fetchAllTenants(landlordDb: NeonHttpDatabase): Promise<Tenant[]> {
+async function fetchAllTenants(landlordDb: DrizzleDatabase): Promise<Tenant[]> {
   const rows = await landlordDb.select().from(tenants)
   return rows.map((row) => ({
     id: row.id,

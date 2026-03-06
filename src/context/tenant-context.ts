@@ -1,7 +1,6 @@
-import type { NeonHttpDatabase } from 'drizzle-orm/neon-http'
-import type { Tenant, TenantContext, SwitchTenantTask } from '../types.js'
+import type { Tenant, TenantContext, SwitchTenantTask, DrizzleDatabase } from '../types.js'
 
-export function createContext(landlordDb: NeonHttpDatabase): TenantContext {
+export function createContext(landlordDb: DrizzleDatabase): TenantContext {
   return {
     tenant: null,
     db: null,

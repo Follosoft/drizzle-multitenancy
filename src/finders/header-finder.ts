@@ -1,6 +1,5 @@
 import { eq } from 'drizzle-orm'
-import type { NeonHttpDatabase } from 'drizzle-orm/neon-http'
-import type { Tenant, TenantFinder } from '../types.js'
+import type { Tenant, TenantFinder, DrizzleDatabase } from '../types.js'
 import { tenants } from '../schema/tenants.js'
 
 export interface HeaderFinderOptions {
@@ -11,7 +10,7 @@ export function createHeaderFinder(options: HeaderFinderOptions = {}): TenantFin
   const headerName = options.headerName ?? 'x-tenant-id'
 
   return {
-    async findForRequest(req: Request, landlordDb: NeonHttpDatabase): Promise<Tenant | null> {
+    async findForRequest(req: Request, landlordDb: DrizzleDatabase): Promise<Tenant | null> {
       const tenantId = req.headers.get(headerName)
       if (!tenantId) return null
 

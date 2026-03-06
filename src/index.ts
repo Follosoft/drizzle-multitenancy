@@ -6,6 +6,8 @@ export type {
   SwitchTenantTask,
   TenantFinder,
   TenancyConfig,
+  DrizzleDatabase,
+  DatabaseClientFactory,
 } from './types.js'
 
 // Config
@@ -46,6 +48,9 @@ export { serializeTenantPayload, extractTenantFromPayload } from './jobs/tenant-
 export type { TenantAwarePayload } from './jobs/tenant-aware.js'
 export { wrapDispatcher } from './jobs/job-dispatcher.js'
 export { withTenantJob } from './jobs/job-handler.js'
+
+// Providers
+export { neonClientFactory } from './providers/neon.js'
 
 // Schema
 export { tenants } from './schema/tenants.js'

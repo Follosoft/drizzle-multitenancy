@@ -1,6 +1,5 @@
 import { eq } from 'drizzle-orm'
-import type { NeonHttpDatabase } from 'drizzle-orm/neon-http'
-import type { TenantContext, SwitchTenantTask } from '../types.js'
+import type { TenantContext, SwitchTenantTask, DrizzleDatabase } from '../types.js'
 import type { TenantAwarePayload } from './tenant-aware.js'
 import { tenants } from '../schema/tenants.js'
 import { createContext, makeCurrent, forgetCurrent } from '../context/tenant-context.js'
@@ -18,7 +17,7 @@ type JobCallback = (payload: TenantAwarePayload, ctx: TenantContext) => void | P
  *   })
  */
 export function withTenantJob(
-  landlordDb: NeonHttpDatabase,
+  landlordDb: DrizzleDatabase,
   tasks: SwitchTenantTask[],
   callback: JobCallback,
 ): (payload: TenantAwarePayload) => Promise<void> {

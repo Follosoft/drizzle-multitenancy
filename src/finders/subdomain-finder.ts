@@ -1,6 +1,5 @@
 import { eq } from 'drizzle-orm'
-import type { NeonHttpDatabase } from 'drizzle-orm/neon-http'
-import type { Tenant, TenantFinder } from '../types.js'
+import type { Tenant, TenantFinder, DrizzleDatabase } from '../types.js'
 import { tenants } from '../schema/tenants.js'
 
 export interface SubdomainFinderOptions {
@@ -9,7 +8,7 @@ export interface SubdomainFinderOptions {
 
 export function createSubdomainFinder(options: SubdomainFinderOptions): TenantFinder {
   return {
-    async findForRequest(req: Request, landlordDb: NeonHttpDatabase): Promise<Tenant | null> {
+    async findForRequest(req: Request, landlordDb: DrizzleDatabase): Promise<Tenant | null> {
       const url = new URL(req.url)
       const hostname = url.hostname
 

@@ -1,15 +1,12 @@
-import { neon } from '@neondatabase/serverless'
-import { drizzle } from 'drizzle-orm/neon-http'
-import type { Tenant, TenantContext, SwitchTenantTask } from '../types.js'
+import type { Tenant, TenantContext, SwitchTenantTask, DatabaseClientFactory } from '../types.js'
 
 /**
  * Separate-DB strategy: creates a new Drizzle client pointing at the tenant's database.
  */
-export function createSwitchDatabaseTask(): SwitchTenantTask {
+export function createSwitchDatabaseTask(createClient: DatabaseClientFactory): SwitchTenantTask {
   return {
     makeCurrent(tenant: Tenant, ctx: TenantContext) {
-      const sql = neon(tenant.databaseUrl)
-      ctx.db = drizzle(sql)
+      ctx.db = createClient(tenant.databaseUrl)
     },
     forgetCurrent(ctx: TenantContext) {
       ctx.db = null

@@ -1,6 +1,6 @@
 {
   "name": "@follosoft/drizzle-multitenancy",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Multi-tenancy for Drizzle ORM — inspired by Spatie's laravel-multitenancy, built for serverless edge functions.",
   "type": "module",
   "main": "./dist/index.js",
@@ -44,6 +44,11 @@
   "peerDependencies": {
     "drizzle-orm": ">=0.30.0",
     "@neondatabase/serverless": ">=0.9.0"
+  },
+  "peerDependenciesMeta": {
+    "@neondatabase/serverless": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@neondatabase/serverless": "^0.10.4",

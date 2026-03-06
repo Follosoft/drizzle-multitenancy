@@ -1,5 +1,4 @@
-import type { NeonHttpDatabase } from 'drizzle-orm/neon-http'
-import type { TenantContext, SwitchTenantTask } from '../types.js'
+import type { TenantContext, SwitchTenantTask, DrizzleDatabase } from '../types.js'
 import { forgetCurrent, makeCurrent } from './tenant-context.js'
 
 /**
@@ -9,7 +8,7 @@ import { forgetCurrent, makeCurrent } from './tenant-context.js'
 export async function landlordExecute<T>(
   ctx: TenantContext,
   tasks: SwitchTenantTask[],
-  callback: (landlordDb: NeonHttpDatabase) => T | Promise<T>,
+  callback: (landlordDb: DrizzleDatabase) => T | Promise<T>,
 ): Promise<T> {
   const previousTenant = ctx.tenant
   if (previousTenant) {

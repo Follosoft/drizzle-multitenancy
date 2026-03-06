@@ -1,5 +1,4 @@
-import type { Tenant, TenantContext, SwitchTenantTask, TenantFinder } from '../src/types.js'
-import type { NeonHttpDatabase } from 'drizzle-orm/neon-http'
+import type { Tenant, TenantContext, SwitchTenantTask, TenantFinder, DrizzleDatabase } from '../src/types.js'
 
 export function makeTenant(overrides: Partial<Tenant> = {}): Tenant {
   return {
@@ -17,18 +16,18 @@ export function makeTenant(overrides: Partial<Tenant> = {}): Tenant {
 }
 
 /** Fake landlord DB — just a plain object stub for unit tests. */
-export function fakeLandlordDb(): NeonHttpDatabase {
-  return {} as NeonHttpDatabase
+export function fakeLandlordDb(): DrizzleDatabase {
+  return {} as DrizzleDatabase
 }
 
 /** Fake landlord DB with a chainable select() that always returns an empty array. */
-export function fakeQueryableDb(): NeonHttpDatabase {
+export function fakeQueryableDb(): DrizzleDatabase {
   const chain = {
     from: () => chain,
     where: () => chain,
     limit: () => Promise.resolve([]),
   }
-  return { select: () => chain } as unknown as NeonHttpDatabase
+  return { select: () => chain } as unknown as DrizzleDatabase
 }
 
 /** A task that records calls for assertions. */

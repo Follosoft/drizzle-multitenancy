@@ -1,6 +1,5 @@
 import { eq } from 'drizzle-orm'
-import type { NeonHttpDatabase } from 'drizzle-orm/neon-http'
-import type { Tenant, TenantFinder } from '../types.js'
+import type { Tenant, TenantFinder, DrizzleDatabase } from '../types.js'
 import { tenants } from '../schema/tenants.js'
 
 export interface JwtFinderOptions {
@@ -15,7 +14,7 @@ export function createJwtFinder(options: JwtFinderOptions = {}): TenantFinder {
   const decode = options.decode ?? defaultDecode
 
   return {
-    async findForRequest(req: Request, landlordDb: NeonHttpDatabase): Promise<Tenant | null> {
+    async findForRequest(req: Request, landlordDb: DrizzleDatabase): Promise<Tenant | null> {
       const authHeader = req.headers.get('authorization')
       if (!authHeader?.startsWith('Bearer ')) return null
 
