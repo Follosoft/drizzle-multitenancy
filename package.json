@@ -1,0 +1,54 @@
+{
+  "name": "@follosoft/drizzle-multitenancy",
+  "version": "0.1.0",
+  "description": "Multi-tenancy for Drizzle ORM — inspired by Spatie's laravel-multitenancy, built for serverless edge functions.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "drizzle",
+    "multitenancy",
+    "multi-tenant",
+    "saas",
+    "neon",
+    "serverless"
+  ],
+  "author": "FolloSoft",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Follosoft/drizzle-multitenancy.git"
+  },
+  "homepage": "https://github.com/Follosoft/drizzle-multitenancy#readme",
+  "bugs": {
+    "url": "https://github.com/Follosoft/drizzle-multitenancy/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "peerDependencies": {
+    "drizzle-orm": ">=0.30.0",
+    "@neondatabase/serverless": ">=0.9.0"
+  },
+  "devDependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "drizzle-orm": "^0.38.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}
