@@ -1,14 +1,15 @@
 {
   "name": "@follosoft/drizzle-multitenancy",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Multi-tenancy for Drizzle ORM — inspired by Spatie's laravel-multitenancy, built for serverless edge functions.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "default": "./dist/index.js"
     }
   },
   "files": [
